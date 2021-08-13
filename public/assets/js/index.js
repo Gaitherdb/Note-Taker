@@ -10,6 +10,7 @@ if (window.location.pathname === '/notes') {
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
+  // singleNote = document.querySelectorAll('.list-item-title');
 }
 
 // Show an element
@@ -83,13 +84,16 @@ const handleNoteDelete = (e) => {
   e.stopPropagation();
 
   const note = e.target;
+  console.log(note);
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
-
+  console.log(noteId);
   if (activeNote.id === noteId) {
     activeNote = {};
   }
-
+  getNotes();
   deleteNote(noteId).then(() => {
+    console.log("deleting note");
+    console.info("now rendering new notes after delete");
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -155,7 +159,7 @@ const renderNoteList = async (notes) => {
   };
 
   if (jsonNotes.length === 0) {
-    noteListItems.push(createLi('No saved Notes', false));
+    noteListItems.push(createLi('No saved Notes', true));
   }
 
   jsonNotes.forEach((note) => {
@@ -169,15 +173,30 @@ const renderNoteList = async (notes) => {
     noteListItems.forEach((note) => noteList[0].append(note));
   }
 };
+// const renderSavetoActive = async (notes) => {
+//   await notes.json();
+//   const note = e.target;
+//   const noteText = JSON.parse(note.parentElement.getAttribute('data-note'));
+//   console.log(note);
+//   if (noteText) {
+//     activeNote = noteText;
+//     renderActiveNote();
+//   }
+//   console.log('dog');
+// }
+
 
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
+
+getAndRenderNotes();
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
+  // singleNote.addEventListener('click', renderSavetoActive);
 }
 
-getAndRenderNotes();
+
