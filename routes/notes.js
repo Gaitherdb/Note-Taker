@@ -1,14 +1,16 @@
 const notes = require('express').Router();
 const { readFromFile, readAndAppend, writeToFile, } = require('../helpers/fsUtils');
 const uuid = require('../helpers/uuid');
-const dbNotes = require('../db/db.json');
 
-
-console.log(dbNotes);
 // GET Route for retrieving all the notes
 notes.get('/', (req, res) => {
     console.info(`${req.method} request received for notes`);
-    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+    readFromFile('./db/db.json').then((data) => {
+        if (data.length > 0) {
+            res.json(JSON.parse(data))
+        }
+    });
+
 });
 
 // POST Route for a new UX/UI note
@@ -33,32 +35,15 @@ notes.post('/', (req, res) => {
 });
 
 notes.delete('/:id', (req, res) => {
-    if (req.body && req.params.id) {
-        console.info(`${req.method} request received to delete a note`);
-        const id = req.params.id;
-        console.info('duck');
-        console.info(dbNotes);
-        console.info('penguin');
-        for (let i = 0; i < dbNotes.length; i++) {
-            const currentNote = dbNotes[i];
-            if (currentNote.id == id) {
-                dbNotes.splice(i, 1);
-                console.info(dbNotes);
-                writeToFile('./db/db.json', dbNotes);
-                res.json('Note deleted successfully');
-                console.info('Note deleted for real')
-                console.info(dbNotes);
-            }
-        }
-    };
+    console.info(`${req.method} request received to delete a note`);
+    const id = req.params.id;
+    readFromFile('./db/db.json').then(result => {
+        const dbNotes = JSON.parse(result);
+        const updatedNotes = dbNotes.filter(note => note.id !== id);
+        writeToFile('./db/db.json', updatedNotes);
+        res.json('Note deleted successfully');
+    })
 });
 
 module.exports = notes;
 
-// dbNotes.map(e => {
-
-//     if(e.id == id){
-
-//     }})
-  // let keep = dbNotes.filter(db => db !== currentNote);
-                // dbNotes.splice()

@@ -90,7 +90,6 @@ const handleNoteDelete = (e) => {
   if (activeNote.id === noteId) {
     activeNote = {};
   }
-  getNotes();
   deleteNote(noteId).then(() => {
     console.log("deleting note");
     console.info("now rendering new notes after delete");
@@ -159,7 +158,7 @@ const renderNoteList = async (notes) => {
   };
 
   if (jsonNotes.length === 0) {
-    noteListItems.push(createLi('No saved Notes', true));
+    noteListItems.push(createLi('No saved Notes', false));
   }
 
   jsonNotes.forEach((note) => {
