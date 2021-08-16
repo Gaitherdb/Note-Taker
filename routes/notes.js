@@ -9,8 +9,7 @@ notes.get('/', (req, res) => {
         if (data.length > 0) {
             res.json(JSON.parse(data))
         }
-    });
-
+    })
 });
 
 // POST Route for a new UX/UI note
@@ -42,6 +41,7 @@ notes.delete('/:id', (req, res) => {
         const updatedNotes = dbNotes.filter(note => note.id !== id);
         writeToFile('./db/db.json', updatedNotes);
         res.json('Note deleted successfully');
+        console.info('Note deleted successfully');
     })
 });
 

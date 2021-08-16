@@ -10,7 +10,6 @@ if (window.location.pathname === '/notes') {
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
-  // singleNote = document.querySelectorAll('.list-item-title');
 }
 
 // Show an element
@@ -172,17 +171,6 @@ const renderNoteList = async (notes) => {
     noteListItems.forEach((note) => noteList[0].append(note));
   }
 };
-// const renderSavetoActive = async (notes) => {
-//   await notes.json();
-//   const note = e.target;
-//   const noteText = JSON.parse(note.parentElement.getAttribute('data-note'));
-//   console.log(note);
-//   if (noteText) {
-//     activeNote = noteText;
-//     renderActiveNote();
-//   }
-//   console.log('dog');
-// }
 
 
 // Gets notes from the db and renders them to the sidebar
@@ -195,7 +183,6 @@ if (window.location.pathname === '/notes') {
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
-  // singleNote.addEventListener('click', renderSavetoActive);
 }
 
 
