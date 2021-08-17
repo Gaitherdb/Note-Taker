@@ -6,12 +6,12 @@ const api = require('./routes/index.js');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
-app.use(clog);
+//Middleware
+app.use(clog);//logs color change and record fetch requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
+//notes js - get,post,delete from db
 app.use('/api', api);
 
 app.get('/', (req, res) =>

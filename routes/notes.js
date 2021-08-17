@@ -12,7 +12,7 @@ notes.get('/', (req, res) => {
     })
 });
 
-// POST Route for a new UX/UI note
+// POST Route for a new note
 notes.post('/', (req, res) => {
     console.info(`${req.method} request received to add a note`);
     console.log(req.body);
