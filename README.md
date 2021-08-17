@@ -1,3 +1,4 @@
+
 # Note Taker
   ## ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
@@ -32,7 +33,7 @@
   ## Usage
   Set the path to the Note-Taker folder in the terminal, run the server.js file by typing `node server.js`. Access the local url at `http://localhost:3001` and try adding, saving, or deleting a note. Notice these changes appear in the db.json file. 
 
-
+![NoteTakerExample](https://user-images.githubusercontent.com/83731627/129653973-8a02a6c9-7c13-4463-8fdd-14adedd24dc3.png)
 
   ## License  
   This project is licensed under the terms of the [MIT License](https://opensource.org/licenses/MIT).
